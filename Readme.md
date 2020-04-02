@@ -1,7 +1,7 @@
-# Личный проект «Киноман» [![Build status][travis-image]][travis-url]
+﻿# Личный проект «Киноман» [![Build status][travis-image]][travis-url]
 
 * Студент: [Роман Вахрин](https://up.htmlacademy.ru/ecmascript/11/user/810039).
-* Наставник: `Неизвестно`.
+* Наставник: [Екатерина Малецкая](https://htmlacademy.ru/profile/id902197)
 
 ---
 
