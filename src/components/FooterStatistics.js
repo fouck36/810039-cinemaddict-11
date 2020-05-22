@@ -1,3 +1,4 @@
+import {ALL_FILMS_COUNT} from "../main.js";
 export const createFooterStatisticsTemplate = () => {
-  return (`<p>130 291 movies inside</p>`);
-}
+  return (`<p>${ALL_FILMS_COUNT} movies inside</p>`);
+};
