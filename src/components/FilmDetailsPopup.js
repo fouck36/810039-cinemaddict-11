@@ -1,3 +1,5 @@
+import {createElement} from "../utils.js";
+
 const createCommentMarkup = (comments) => {
   return comments.map((data) => {
     const {commentDate, commentText, commentAuthor, emoji} = data;
@@ -26,7 +28,7 @@ const createGenreMarkup = (genres) => {
   }).join(`\n`);
 };
 
-export const createFilmDetailsPopupTemplate = (popup) => {
+const createFilmDetailsPopupTemplate = (popup) => {
   const {title, rating, releaseDate, duration, genre, poster, description, countOfComments, ageRating, alternativeTitle, director, writers, actors, country, comment} = popup;
 
   const year = `${releaseDate.getFullYear()}`;
@@ -153,3 +155,21 @@ export const createFilmDetailsPopupTemplate = (popup) => {
   );
 };
 
+export default class Popup {
+  constructor(popup) {
+    this._popup = popup;
+    this._element = null;
+  }
+  getTemplate() {
+    return createFilmDetailsPopupTemplate(this._popup);
+  }
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+    return this._element;
+  }
+  removeElement() {
+    this._element = null;
+  }
+}

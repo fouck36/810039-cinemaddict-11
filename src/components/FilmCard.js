@@ -1,4 +1,6 @@
-export const createFilmCardTemplate = (filmCard) => {
+import {createElement} from "../utils.js";
+
+const createFilmCardTemplate = (filmCard) => {
   const {title, rating, releaseDate, duration, genre, poster, description, countOfComments, IsWatchlist, IsWatched, IsFavorite} = filmCard;
 
   const year = `${releaseDate.getFullYear()}`;
@@ -7,8 +9,8 @@ export const createFilmCardTemplate = (filmCard) => {
   const watchedButtonInactiveClass =  IsWatched ? `film-card__controls-item--active` : ``;
   const favoriteButtonInactiveClass =  IsFavorite ? `film-card__controls-item--active` : ``;
 
-return (
-  `<article class="film-card">
+  return (
+    `<article class="film-card">
         <h3 class="film-card__title">${title}</h3>
         <p class="film-card__rating">${rating}</p>
         <p class="film-card__info">
@@ -25,5 +27,24 @@ return (
           <button class="film-card__controls-item button film-card__controls-item--favorite ${favoriteButtonInactiveClass}">Mark as favorite</button>
         </form>
       </article>`
-);
+  );
 };
+
+export default class FilmCard {
+  constructor(filmCard) {
+    this._filmCard = filmCard;
+    this._element = null;
+  }
+  getTemplate() {
+    return createFilmCardTemplate(this._filmCard);
+  }
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+    return this._element;
+  }
+  removeElement() {
+    this._element = null;
+  }
+}

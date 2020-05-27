@@ -1,10 +1,12 @@
+import {createElement} from "../utils.js";
+
 const createNavigationMarkup = (name, count) =>{
   return (
     `<a href="#${name.toLowerCase()}" class="main-navigation__item">${name} <span class="main-navigation__item-count">${count}</span></a>`
   );
 };
 
-export const createNavigationTemplate = (navigation) => {
+const createNavigationTemplate = (navigation) => {
   const navigationMarkup = navigation.map((it) => createNavigationMarkup(it.name, it.count)).join(`\n`);
   return (
     `<nav class="main-navigation">
@@ -21,3 +23,22 @@ export const createNavigationTemplate = (navigation) => {
 //<a href="#history" class="main-navigation__item">History <span class="main-navigation__item-count">4</span></a>
 //<a href="#favorites" class="main-navigation__item">Favorites <span class="main-navigation__item-count">8</span></a>
 //<a href="#watchlist" class="main-navigation__item">Watchlist <span class="main-navigation__item-count">42</span></a>
+
+export default class Navigation {
+  constructor(navigation) {
+    this._navigation = navigation;
+    this._element = null;
+  }
+  getTemplate() {
+    return createNavigationTemplate(this._navigation);
+  }
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+    return this._element;
+  }
+  removeElement() {
+    this._element = null;
+  }
+}
